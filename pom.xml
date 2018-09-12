@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>experiments</groupId>
+    <artifactId>experiments-scala</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <scala.version>2.10.3</scala.version>
+        <scala.binary.version>2.10</scala.binary.version>
+        <akka.version>2.2.3</akka.version>
+    </properties>
+
+    <repositories>
+        <repository>
+          <id>typesafe</id>
+          <name>Typesafe Repository</name>
+          <url>http://repo.typesafe.com/typesafe/releases/</url>
+        </repository>
+        <repository>
+            <id>twitter</id>
+            <name>Twitter Repo</name>
+            <url>http://maven.twttr.com/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_${scala.binary.version}</artifactId>
+            <version>${akka.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.scala-lang</groupId>
+                    <artifactId>scala-library</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.scalaz</groupId>
+        	<artifactId>scalaz-core_2.10.0-RC5</artifactId>
+        	<version>6.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-testkit_2.10</artifactId>
+            <version>${akka.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.binary.version}</artifactId>
+            <version>1.9.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>util-core</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.0</version>
+              <configuration>
+                <source>1.5</source>
+                <target>1.5</target>
+              </configuration>
+          </plugin>
+
+          <plugin>
+       				<groupId>org.scala-tools</groupId>
+       				<artifactId>maven-scala-plugin</artifactId>
+                       <version>2.14.2</version>
+                       <configuration>
+                           <displayCmd>true</displayCmd>
+                           <scalaVersion>${scala.version}</scalaVersion>
+                           <mainSourceDir>src/main</mainSourceDir>
+                       </configuration>
+       				<executions>
+                           <execution>
+                              <phase>process-resources</phase>
+                              <goals>
+                                <goal>compile</goal>
+                              </goals>
+                           </execution>
+       					<execution>
+       						<id>scala-compile</id>
+       						<phase>compile</phase>
+       						<goals>
+       							<goal>compile</goal>
+       						</goals>
+       					</execution>
+       					<execution>
+       						<id>scala-test-compile</id>
+       						<phase>process-test-resources</phase>
+       						<goals>
+       							<goal>testCompile</goal>
+       						</goals>
+       					</execution>
+       				</executions>
+       			</plugin>
+        <!--<plugin>-->
+          <!--<groupId>net.alchim31.maven</groupId>-->
+          <!--<artifactId>scala-maven-plugin</artifactId>-->
+          <!--<version>3.1.0</version>-->
+        <!--</plugin>-->
+      </plugins>
+    </build>
+
+</project>
